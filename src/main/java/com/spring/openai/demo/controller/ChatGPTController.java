@@ -1,9 +1,8 @@
-package com.spring.openai.demo;
+package com.spring.openai.demo.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-public class AIController {
+public class ChatGPTController {
     private final ChatClient chatClient;
 
     // Spring autoconfigures this builder for you
-    public AIController(ChatClient.Builder builder) {
+    public ChatGPTController(ChatClient.Builder builder) {
         this.chatClient = builder.build();
     }
 
