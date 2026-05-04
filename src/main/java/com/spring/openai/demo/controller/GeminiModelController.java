@@ -30,7 +30,7 @@ public class GeminiModelController {
                             .build();
     }
 
-    @GetMapping("/gemini/models")
+    @GetMapping("/api/gemini/models")
     public List<GeminiModel> models() {
         ResponseEntity<ModelListResponse> response = restClient.get().uri("/v1beta/openai/models")
                 .header("Authorization", "Bearer " + GEMINI_API_KEY)

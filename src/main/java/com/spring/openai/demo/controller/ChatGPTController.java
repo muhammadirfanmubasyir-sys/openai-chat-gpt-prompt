@@ -23,7 +23,7 @@ public class ChatGPTController {
      * @param sports
      * @return
      */
-    @GetMapping("/find-person")
+    @GetMapping("/api/chat-gpt/find-person")
     public String findPopularSportsPerson(@RequestParam String sports) {
         String message = """
                 List of  5 most popular person in {sports} along
@@ -41,7 +41,7 @@ public class ChatGPTController {
      * @param message
      * @return
      */
-    @GetMapping("/prompt")
+    @GetMapping("/api/chat-gpt/prompt")
     public String prompt(@RequestParam String message) {
         PromptTemplate template = new PromptTemplate(message);
         Prompt prompt = template.create();
