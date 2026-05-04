@@ -16,6 +16,9 @@ import java.util.List;
 public class GeminiModelController {
     private static final Logger log = LoggerFactory.getLogger(GeminiModelController.class);
 
+    /**
+     * #https://aistudio.google.com/app/api-keys?_gl=1*kdjzi*_ga*MzI3NDQzMDIuMTc3Nzc3MTU1NA..*_ga_P1DBVKWT6V*czE3Nzc3NzE1NTQkbzEkZzAkdDE3Nzc3NzE1ODQkajMwJGwwJGgyMDk1MTI3NDMx&project=gen-lang-client-0903506764
+     */
     @Value("${spring.ai.openai.api-key}")
     private String GEMINI_API_KEY;
 
@@ -34,6 +37,8 @@ public class GeminiModelController {
                 .retrieve()
                 .toEntity(ModelListResponse.class);
 
+
         return response.getBody().data();
     }
+
 }

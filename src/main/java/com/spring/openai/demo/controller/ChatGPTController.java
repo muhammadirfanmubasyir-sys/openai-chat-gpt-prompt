@@ -18,7 +18,12 @@ public class ChatGPTController {
         this.chatClient = builder.build();
     }
 
-    @GetMapping("/")
+    /**
+     * Usage: http://localhost:8080/find-person?sports=tennis
+     * @param sports
+     * @return
+     */
+    @GetMapping("/find-person")
     public String findPopularSportsPerson(@RequestParam String sports) {
         String message = """
                 List of  5 most popular person in {sports} along
@@ -27,6 +32,19 @@ public class ChatGPTController {
                 """;
         PromptTemplate template = new PromptTemplate(message);
         Prompt prompt = template.create(Map.of("sports", sports));
+
+        return chatClient.prompt(prompt).call().content();
+    }
+
+    /**
+     * Usage: http://localhost:8080/prompt?message=Tell an interesting fact about google
+     * @param message
+     * @return
+     */
+    @GetMapping("/prompt")
+    public String prompt(@RequestParam String message) {
+        PromptTemplate template = new PromptTemplate(message);
+        Prompt prompt = template.create();
 
         return chatClient.prompt(prompt).call().content();
     }
