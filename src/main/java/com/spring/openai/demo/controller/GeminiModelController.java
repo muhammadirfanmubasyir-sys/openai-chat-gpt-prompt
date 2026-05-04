@@ -27,7 +27,7 @@ public class GeminiModelController {
                             .build();
     }
 
-    @GetMapping("/models")
+    @GetMapping("/gemini/models")
     public List<GeminiModel> models() {
         ResponseEntity<ModelListResponse> response = restClient.get().uri("/v1beta/openai/models")
                 .header("Authorization", "Bearer " + GEMINI_API_KEY)

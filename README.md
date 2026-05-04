@@ -1,6 +1,6 @@
 BISMILLAH
 ==========
-http://localhost:8080/models
+http://localhost:8080/gemini/models
 [
     {
         "id": "models/gemini-2.5-flash",
