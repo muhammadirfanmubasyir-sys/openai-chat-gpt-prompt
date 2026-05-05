@@ -5,6 +5,7 @@ import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class ChatGPTController {
     /**
      * Usage: http://localhost:8080/api/chat-gpt/find-person?sports=tennis
      * @param sports
-     * @return
+     * @return  String response from Chat GPT
      */
     @GetMapping("/api/chat-gpt/find-person")
     public String findPopularSportsPerson(@RequestParam String sports) {
@@ -42,7 +43,7 @@ public class ChatGPTController {
     /**
      * Usage: http://localhost:8080/api/chat-gpt/prompt?message=Tell an interesting fact about google
      * @param message
-     * @return
+     * @return  String response from Chat GPT
      */
     @GetMapping("/api/chat-gpt/prompt")
     public String prompt(@RequestParam String message) {
@@ -55,7 +56,7 @@ public class ChatGPTController {
     /**
      * Usage: http://localhost:8080/api/chat-gpt/ask?sports=tennis
      * @param sports
-     * @return
+     * @return String response from Chat GPT
      */
     @GetMapping("/api/chat-gpt/ask")
     public String ask(@RequestParam String sports) {
@@ -74,5 +75,26 @@ public class ChatGPTController {
         return chatClient.prompt(prompt).call().content();
     }
 
+    /**
+     * Usage: http://localhost:8080/api/chat-gpt/find-sports?player-name=Mohammed Ali
+     * @param 'player-name'
+     *
+     * @return Player
+     */
+    @GetMapping("/api/chat-gpt/find-sports")
+    public Player findPopularSportByPerson(@RequestParam(value = "player-name") String playerName) {
+        BeanOutputConverter<Player> converter =
+                new BeanOutputConverter(Player.class);
 
+        String message = """
+                Generate a list of Career achievements for the player in {playerName}.
+                Include the Player as the key and achievements as the value for it.
+                {format}
+                """;
+        PromptTemplate template = new PromptTemplate(message);
+        Prompt prompt = template.create(Map.of("playerName", playerName,
+                                                "format", converter.getFormat()));
+
+        return converter.convert(chatClient.prompt(prompt).call().content());
+    }
 }
