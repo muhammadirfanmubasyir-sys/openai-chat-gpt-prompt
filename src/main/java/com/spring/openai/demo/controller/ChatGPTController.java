@@ -6,6 +6,8 @@ import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.converter.BeanOutputConverter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,9 @@ import java.util.Map;
 @RestController
 public class ChatGPTController {
     private final ChatClient chatClient;
+
+    @Value("classpath:/prompts/message.st")
+    private Resource myPromptResource;
 
     // Spring autoconfigures this builder for you
     public ChatGPTController(ChatClient.Builder builder) {
@@ -86,12 +91,8 @@ public class ChatGPTController {
         BeanOutputConverter<Player> converter =
                 new BeanOutputConverter(Player.class);
 
-        String message = """
-                Generate a list of Career achievements for the player in {playerName}.
-                Include the Player as the key and achievements as the value for it.
-                {format}
-                """;
-        PromptTemplate template = new PromptTemplate(message);
+
+        PromptTemplate template = new PromptTemplate(myPromptResource);
         Prompt prompt = template.create(Map.of("playerName", playerName,
                                                 "format", converter.getFormat()));
 
