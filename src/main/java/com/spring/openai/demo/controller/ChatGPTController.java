@@ -9,6 +9,7 @@ import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api/chat-gpt")
 public class ChatGPTController {
     private final ChatClient chatClient;
 
@@ -32,7 +34,7 @@ public class ChatGPTController {
      * @param sports
      * @return  String response from Chat GPT
      */
-    @GetMapping("/api/chat-gpt/find-person")
+    @GetMapping("/find-person")
     public String findPopularSportsPerson(@RequestParam String sports) {
         String message = """
                 List of  5 most popular person in {sports} along
@@ -50,7 +52,7 @@ public class ChatGPTController {
      * @param message
      * @return  String response from Chat GPT
      */
-    @GetMapping("/api/chat-gpt/prompt")
+    @GetMapping("/prompt")
     public String prompt(@RequestParam String message) {
         PromptTemplate template = new PromptTemplate(message);
         Prompt prompt = template.create();
@@ -63,11 +65,11 @@ public class ChatGPTController {
      * @param sports
      * @return String response from Chat GPT
      */
-    @GetMapping("/api/chat-gpt/ask")
+    @GetMapping("/ask")
     public String ask(@RequestParam String sports) {
         var systemMessage = new SystemMessage("""
                 Your primary function is to share information about sports.
-                If someone ask about anything else, you can say that you only share about sport.
+                If someone ask about anything else, you can say I don't know.
                 """);
 
         var userMessage = new UserMessage(
@@ -86,7 +88,7 @@ public class ChatGPTController {
      *
      * @return Player
      */
-    @GetMapping("/api/chat-gpt/find-sports")
+    @GetMapping("/find-sports")
     public Player findPopularSportByPerson(@RequestParam(value = "player-name") String playerName) {
         BeanOutputConverter<Player> converter =
                 new BeanOutputConverter(Player.class);
