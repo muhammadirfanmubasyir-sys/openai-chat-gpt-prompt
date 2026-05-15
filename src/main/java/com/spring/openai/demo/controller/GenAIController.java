@@ -56,7 +56,7 @@ public class GenAIController {
     }
 
     @GetMapping("/image-to-text")
-    public String generateImageToText() {
+    public String generateTextFromImage() {
         String prompt = "Explain what do you see in this image";
         String imageAbsolutePath = "C:\\Users\\LENOVO L13 YOGA\\Pictures\\BUDHA.jpg";
         String response =
@@ -71,7 +71,7 @@ public class GenAIController {
     }
 
     @GetMapping("/audio-to-text")
-    public String generateAudioToText() {
+    public String generateTextFromAudio() {
         String absoluteFilePath = "D:\\harvard.wav";
 
         OpenAiAudioTranscriptionOptions options
@@ -91,7 +91,7 @@ public class GenAIController {
     }
 
     @GetMapping("/text-to-audio/{prompt}")
-    public ResponseEntity<ByteArrayResource> generateAudio(@PathVariable("prompt") String prompt) {
+    public ResponseEntity<ByteArrayResource> generateAudioFromText(@PathVariable("prompt") String prompt) {
         OpenAiAudioSpeechOptions options =
                 OpenAiAudioSpeechOptions.builder()
                         .model("tts-1")
