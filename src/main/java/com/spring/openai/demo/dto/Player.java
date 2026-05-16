@@ -1,4 +1,4 @@
-package com.spring.openai.demo.controller;
+package com.spring.openai.demo.dto;
 
 import java.util.List;
 

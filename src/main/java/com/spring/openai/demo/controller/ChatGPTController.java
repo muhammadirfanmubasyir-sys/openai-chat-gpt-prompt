@@ -1,5 +1,6 @@
 package com.spring.openai.demo.controller;
 
+import com.spring.openai.demo.dto.Player;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
