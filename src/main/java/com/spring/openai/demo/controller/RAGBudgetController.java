@@ -4,6 +4,7 @@ import org.springframework.ai.chat.client.ChatClient;
 
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +12,8 @@ import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvi
 import static org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor.Builder;
 
 @RestController
-public class BudgetController {
+@RequestMapping("/api/rag")
+public class RAGBudgetController {
 
     private ChatClient chatClient;
 
@@ -32,8 +34,8 @@ public class BudgetController {
      */
     private VectorStore vectorStore;
 
-    public BudgetController(ChatClient.Builder builder,
-                            VectorStore vectorStore) {
+    public RAGBudgetController(ChatClient.Builder builder,
+                               VectorStore vectorStore) {
 
         this.chatClient = builder.build();
         this.vectorStore = vectorStore;

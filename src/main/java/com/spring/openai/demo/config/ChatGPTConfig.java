@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
 
 @Configuration
-public class ChatConfig {
+public class ChatGPTConfig {
 
     @Bean
     ChatClient chatClient(ChatClient.Builder builder) {

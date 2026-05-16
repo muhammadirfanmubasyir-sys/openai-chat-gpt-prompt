@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.List;
 
 @Configuration
-public class VectorStoreConfig {
+public class RAGVectorStoreConfig {
 
     @Value("classpath:/Budget_Speech.txt")
     private Resource budget;

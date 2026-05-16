@@ -30,8 +30,13 @@ public class ChatGPTController {
         this.chatClient = builder.build();
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "BISMILLAH";
+    }
+
     /**
-     * Usage: http://localhost:8080/api/chat-gpt/find-person?sports=tennis
+     * Usage: http://localhost:<port>/api/chat-gpt/find-person?sports=tennis
      * @param sports
      * @return  String response from Chat GPT
      */
@@ -49,7 +54,7 @@ public class ChatGPTController {
     }
 
     /**
-     * Usage: http://localhost:8080/api/chat-gpt/prompt?message=Tell an interesting fact about google
+     * Usage: http://localhost:<port>/api/chat-gpt/prompt?message=Tell an interesting fact about google
      * @param message
      * @return  String response from Chat GPT
      */
@@ -62,7 +67,7 @@ public class ChatGPTController {
     }
 
     /**
-     * Usage: http://localhost:8080/api/chat-gpt/ask?sports=tennis
+     * Usage: http://localhost:<port>/api/chat-gpt/ask?sports=tennis
      * @param sports
      * @return String response from Chat GPT
      */
@@ -84,7 +89,7 @@ public class ChatGPTController {
     }
 
     /**
-     * Usage: http://localhost:8080/api/chat-gpt/find-sports?player-name=Mohammed Ali
+     * Usage: http://localhost:<port>/api/chat-gpt/find-sports?player-name=Mohammed Ali
      * @param 'player-name'
      *
      * @return Player
